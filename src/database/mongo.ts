@@ -9,7 +9,6 @@ export class Mongo{
         const username: string = process.env.MONGO_USERNAME || "local"
         const password: string = process.env.MONGO_PASSWORD || "local"
 
-
         const client: MongoClient = new MongoClient(url, {auth:{username, password}})
         const db: Db = client.db("financialsApi")
 
