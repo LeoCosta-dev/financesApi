@@ -3,15 +3,15 @@
 PROJECT = "Financials API"
 
 start:
-	yarn compile
-	yarn start
+	npm run compile
+	npm run start
 
 run-local-docker:
 	MONGO_URL=mongodb://localhost:27017 \
 	MONGO_USERNAME=local \
 	MONGO_PASSWORD=local \
-	yarn dev:docker
+	npm run dev:docker
 
 run-local:
-	yarn dev
+	npm run dev
 
