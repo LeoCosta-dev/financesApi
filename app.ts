@@ -1,12 +1,25 @@
 import express from "express";
 import { config } from "dotenv";
+import { Mongo } from "./src/database/mongo";
 
-config()
+class FinancesAPI {
+    static async main() {
+        config()
 
-const app = express()
+        const app = express()
 
-const port = process.env.PORT || 3000
+        const port = process.env.PORT || 3000
 
-app.listen(port, ()=>{
-    console.log(`Servidor rodando em http://localhos:${port}`)
-})
+        try {
+            await Mongo.connect()
+            app.listen(port, () => {
+                console.log(`Servidor rodando em http://localhos:${port}`)
+            })
+        } catch (error) {
+            const err = error as Error
+            console.log(err.message)
+        }
+    }
+}
+
+FinancesAPI.main()
