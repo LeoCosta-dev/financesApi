@@ -22,6 +22,4 @@ class FinancesAPI {
     }
 }
 
-const teste = "oi"
-
 FinancesAPI.main()
