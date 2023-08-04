@@ -68,7 +68,7 @@
   },
   "scripts": {
     "test": "jest",
-    "dev": "nodemon  --watch './' --exec 'ts-node ./app.ts' -e ts",
+    "dev": "nodemon  --watch './' --exec 'ts-node ./server.ts' -e ts",
     "compile": "npx tsc",
     "start": "npm run compile & node ./dist/app.js"
   },
