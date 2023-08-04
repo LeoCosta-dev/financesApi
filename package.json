@@ -71,7 +71,7 @@
     "dev": "nodemon  --watch './' --exec 'ts-node ./server.ts' -e ts",
     "dev:docker": "docker-compose up -d && nodemon  --watch './' --exec 'ts-node ./server.ts' -e ts",
     "compile": "npx tsc",
-    "start": "npm run compile & node ./dist/app.js"
+    "start": "node ./dist/server.js"
   },
   "repository": {
     "type": "git",

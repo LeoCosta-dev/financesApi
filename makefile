@@ -3,6 +3,7 @@
 PROJECT = "Financials API"
 
 start:
+	yarn compile
 	yarn start
 
 run-local-docker:
@@ -13,3 +14,4 @@ run-local-docker:
 
 run-local:
 	yarn dev
+
