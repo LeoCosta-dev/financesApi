@@ -1,11 +1,15 @@
 import express from "express";
 import { Mongo } from "./database/mongo";
-import { routers } from "./routers/routers";
+import { router } from "./router/router";
 
-export class FinancesAPI {
-    static app: express.Application = express()
-
-    static async main() {
+class FinancesAPI {
+    app: express.Application
+    constructor(){
+        this.app = express()
+        this.app.use(express.json())
+        this.app.use(router)
+    }
+    async main() {
         try {
             console.log("Servidor inicializado, tentando conexão com MongoDB.")
             await Mongo.connect()
@@ -14,7 +18,7 @@ export class FinancesAPI {
             const err = error as Error
             console.log(err.message)
         }
-        this.app.use(express.json())
-        this.app.use(routers)
     }
 }
+
+export default new FinancesAPI()

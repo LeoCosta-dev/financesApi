@@ -1,4 +1,4 @@
-import { FinancesAPI } from "./src/app";
+import FinancesAPI from "./src/app";
 import { config } from "dotenv";
 
 config()
