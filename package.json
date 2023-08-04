@@ -63,7 +63,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon  --watch './' --exec 'ts-node ./app.ts' -e ts"
+    "dev": "nodemon  --watch './' --exec 'ts-node ./app.ts' -e ts",
+    "start": ""
   },
   "repository": {
     "type": "git",
