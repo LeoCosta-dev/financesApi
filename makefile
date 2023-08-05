@@ -15,3 +15,7 @@ run-local-docker:
 run-local:
 	npm run dev
 
+deploy:
+	npm i -g vercel
+	npm run compile
+	vercel --prod
