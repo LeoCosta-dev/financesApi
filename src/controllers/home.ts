@@ -4,7 +4,7 @@ export class Home{
     static initial(req: Request, res: Response){
         res.status(200).send(
             `
-            <h1> Financial API - Rota Inicial </h1>
+            <h1> Finances API - Rota Inicial </h1>
             `
         )
     }

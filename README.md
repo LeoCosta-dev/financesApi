@@ -37,5 +37,10 @@ Para fazer deploy do servidor junto a vercel, de maneira pré configurada existe
 make deploy
 ```
 
+Caso já tenha o CLI da vercel instalado, basta rodar o comando abaixo.
+```bash
+make deploy-prod
+```
+
 
 Url base da aplicação: https://finances-api-node.vercel.app/
