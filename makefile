@@ -19,3 +19,6 @@ deploy:
 	npm i -g vercel
 	npm run compile
 	vercel --prod
+
+setup:
+	npm i
