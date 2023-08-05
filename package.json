@@ -67,6 +67,7 @@
     "prettier": "^3.0.1"
   },
   "scripts": {
+    "lint" : "./node_modules/.bin/eslint ./",
     "test": "jest",
     "dev": "nodemon  --watch './' --exec 'ts-node ./server.ts' -e ts",
     "dev:docker": "docker-compose up -d && nodemon  --watch './' --exec 'ts-node ./server.ts' -e ts",
