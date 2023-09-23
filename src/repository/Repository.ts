@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { Mongo } from "src/database/mongo";
+import { Mongo } from "../database/mongo";
 
 class Repository {
     private static async create(colection: string, data: object){
