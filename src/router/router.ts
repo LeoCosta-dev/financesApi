@@ -6,3 +6,4 @@ export const router: Router = Router()
 
 router.get("/", Home.initial)
 router.post("/usuarios/login", Usuarios.login)
+router.post("/usuarios/create", Usuarios.cadastrarUsuario)

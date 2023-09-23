@@ -6,6 +6,10 @@ class UsuariosServices{
         const usuario: Usuario = await UsuariosRepository.FindUsuarioByEmail(payload.email)
         return usuario?.senha === payload.senha
     }
+    static async CadastrarUsuario(payload: Usuario){
+        const response = await UsuariosRepository.CreateUsuario(payload)
+        return response
+    }
 }
 
 export default UsuariosServices
