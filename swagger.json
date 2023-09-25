@@ -40,7 +40,7 @@
                 }
             }
         },
-        "/usuario/login":{
+        "/usuarios/login":{
             "post":{
                 "summary":"Login de Usuario",
                 "tags":["Usuarios", "Login"],
@@ -61,6 +61,39 @@
                 "responses":{
                     "204":{
                         "description":"Usuario autenticado com sucesso"
+                    },
+                    "400":{
+                        "description":"Dados de requição incompletos"
+                    },
+                    "401":{
+                        "description":"Dados do usuário incoerentes com a base."
+                    }
+                }
+            }
+        },
+        "/usuarios/{id}/senha":{
+            "patch":{
+                "summary":"Atualização de senha do Usuario",
+                "tags":["Usuarios"],
+                "security":[{
+                    "x-password":[]
+                }, {
+                    "x-newPassword":[]
+                }],
+                "description":"Modificar senha",
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in": "path",
+                        "description":"id do usuário",
+                        "required":true,
+                        "type":"string",
+                        "format":"uuid"
+                    }
+                ],
+                "responses":{
+                    "204":{
+                        "description":"Senha alterada com sucesso"
                     },
                     "400":{
                         "description":"Dados de requição incompletos"
