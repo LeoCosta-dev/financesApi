@@ -4,3 +4,6 @@ dist
 .env
 .vercel
 .DS_store
+
+
+package-lock.json
