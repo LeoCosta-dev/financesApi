@@ -1,15 +1,16 @@
-import { Usuario } from "../models/interfaces/Usuario"
+import Schemas from "../database/Schemas"
+import { IUsuario, IUsuarioUpdate } from "../models/interfaces/IUsuario"
 import Repository from "./Repository"
 
-const USUARIOS_COLLECTION = "Usuarios"
+const USUARIOS_COLLECTION = Schemas.Usuarios()
 
 class UsuariosRepository extends Repository {
     static async FindAllUsuarios(){
         return await this.FindAll(USUARIOS_COLLECTION)
     }
-    static async FindUsuarioById(id: string): Promise<Usuario>{
+    static async FindUsuarioById(id: string): Promise<IUsuario>{
         const response = await this.FindByKey(USUARIOS_COLLECTION, "_id", id)
-        const usuario: Usuario = {
+        const usuario: IUsuario = {
             id: JSON.stringify(response?._id),
             nome: `${response?.nome}`,
             senha: `${response?.senha}`,
@@ -17,9 +18,9 @@ class UsuariosRepository extends Repository {
         }
         return usuario
     }
-    static async FindUsuarioByEmail(email:string): Promise<Usuario>{
+    static async FindUsuarioByEmail(email:string): Promise<IUsuario>{
         const response = await this.FindByKey(USUARIOS_COLLECTION, "email", email)
-        const usuario: Usuario = {
+        const usuario: IUsuario = {
             id: JSON.stringify(response?._id),
             nome: `${response?.nome}`,
             senha: `${response?.senha}`,
@@ -27,13 +28,13 @@ class UsuariosRepository extends Repository {
         }
         return usuario
     }
-    static async UpdateUsuarioById(id: string, data: Usuario){
+    static async UpdateUsuarioById(id: string, data: IUsuarioUpdate){
         return await this.Update(USUARIOS_COLLECTION, id, data)
     }
     static async DeleteUsuarioById(id:string){
         return await this.Delete(USUARIOS_COLLECTION, id)
     }
-    static async CreateUsuario(data: Usuario){
+    static async CreateUsuario(data: IUsuario){
         return await this.Create(USUARIOS_COLLECTION, data)
     }
 }

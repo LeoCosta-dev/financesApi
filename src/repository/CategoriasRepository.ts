@@ -1,11 +1,14 @@
-import { Categoria } from "src/models/interfaces/Categoria"
+import { ICategoria } from "src/models/interfaces/ICategoria"
 import Repository from "./Repository"
+import Schemas from "../database/Schemas"
 
-const CATEGORIAS_COLLECTION = "Categorias"
+const CATEGORIAS_COLLECTION = Schemas.Categorias()
 
 class CategoriasRepository extends Repository {
     static async FindAllCategorias(){
-        return await this.FindAll(CATEGORIAS_COLLECTION )
+        const response = await this.FindAll(CATEGORIAS_COLLECTION )
+        console.log(response)
+        return response
     }
     static async FindCategoriaById(id: string){
         return await this.FindByKey(CATEGORIAS_COLLECTION, "_id", id)
@@ -13,13 +16,13 @@ class CategoriasRepository extends Repository {
     static async FindCategoriaByEmail(email:string){
         return await this.FindByKey(CATEGORIAS_COLLECTION, "email", email)
     }
-    static async UpdateCategoriaById(id: string, data: Categoria){
+    static async UpdateCategoriaById(id: string, data: ICategoria){
         return await this.Update(CATEGORIAS_COLLECTION, id, data)
     }
     static async DeleteCategoriaById(id:string){
         return await this.Delete(CATEGORIAS_COLLECTION, id)
     }
-    static async CreateCategoria(data: Categoria){
+    static async CreateCategoria(data: ICategoria){
         return await this.Create(CATEGORIAS_COLLECTION, data)
     }
 }

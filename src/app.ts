@@ -1,5 +1,5 @@
 import express from "express";
-import { Mongo } from "./database/mongo";
+import { Mongo } from "./database/Mongo";
 import { router } from "./router/router";
 
 class FinancesAPI {
