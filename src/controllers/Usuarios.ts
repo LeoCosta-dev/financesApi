@@ -31,8 +31,7 @@ class Usuarios{
                 senha: `${req?.headers["x-password"]}`
             }
             const response = await UsuariosServices.CadastrarUsuario(payload)
-            console.log(response)
-            res.json(201).json(response)
+            res.status(201).json({message: "cadastrado com sucesso", id: response})
         } catch(e) {
             res.status(400).json()
         }

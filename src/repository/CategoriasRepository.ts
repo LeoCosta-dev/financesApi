@@ -2,7 +2,7 @@ import { ICategoria } from "src/models/interfaces/ICategoria"
 import Repository from "./Repository"
 import Schemas from "../database/Schemas"
 
-const CATEGORIAS_COLLECTION = Schemas.Transacoes()
+const CATEGORIAS_COLLECTION = Schemas.Categorias()
 
 class CategoriasRepository extends Repository {
     static async FindAllCategorias(){

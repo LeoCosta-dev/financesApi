@@ -14,6 +14,9 @@ class TransacoesRepository extends Repository {
     static async FindTransacaoByEmail(email:string){
         return await this.FindByKey(TRANSACOES_COLLECTION, "email", email)
     }
+    static async FindTransacaoByUsuarioId(usuarioId:string){
+        return await this.FindByKey(TRANSACOES_COLLECTION, "usuarioId", usuarioId)
+    }
     static async UpdateTransacaoById(id: string, data: ITransacao){
         return await this.Update(TRANSACOES_COLLECTION, id, data)
     }

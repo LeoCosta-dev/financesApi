@@ -24,7 +24,8 @@ class Repository {
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     static async Create(collection: Model<any>, data: object){
-        return await this.create(collection, data)
+        const response = await this.create(collection, data)
+        return response._id
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     static async Update(collection: Model<any>, id: string, data: object){
