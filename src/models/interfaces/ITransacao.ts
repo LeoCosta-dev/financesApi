@@ -1,4 +1,4 @@
-export interface Transacao {
+export interface ITransacao {
     nome: string,
     descricao?: string,
     categoriaId: string,

@@ -1,7 +1,8 @@
-import { Transacao } from "src/models/interfaces/Transacao"
+import { ITransacao } from "src/models/interfaces/ITransacao"
 import Repository from "./Repository"
+import Schemas from "../database/Schemas"
 
-const TRANSACOES_COLLECTION = "Transacoes"
+const TRANSACOES_COLLECTION = Schemas.Transacoes()
 
 class TransacoesRepository extends Repository {
     static async FindAllTransacoes(){
@@ -13,13 +14,13 @@ class TransacoesRepository extends Repository {
     static async FindTransacaoByEmail(email:string){
         return await this.FindByKey(TRANSACOES_COLLECTION, "email", email)
     }
-    static async UpdateTransacaoById(id: string, data: Transacao){
+    static async UpdateTransacaoById(id: string, data: ITransacao){
         return await this.Update(TRANSACOES_COLLECTION, id, data)
     }
     static async DeleteTransacaoById(id:string){
         return await this.Delete(TRANSACOES_COLLECTION, id)
     }
-    static async CreateTransacao(data: Transacao){
+    static async CreateTransacao(data: ITransacao){
         return await this.Create(TRANSACOES_COLLECTION, data)
     }
 }
