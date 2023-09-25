@@ -53,7 +53,8 @@ class Usuarios{
             if(!req?.headers["x-password"] || !req?.params?.id){
                 throw new Error("Dados inválidos")
             }
-            UsuariosServices.DeletarUsuario(`${req.params.id}`, `${req?.headers["x-password"]}`)
+            await UsuariosServices.DeletarUsuario(`${req.params.id}`, `${req?.headers["x-password"]}`)
+            res.status(204).json()
         } catch (e) {
             const error = e as Error
             if(error.message === "Usuário inválido"){

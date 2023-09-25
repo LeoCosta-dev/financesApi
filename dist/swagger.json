@@ -103,6 +103,40 @@
                     }
                 }
             }
+        },
+        "/usuarios/{id}": {
+            "delete": {
+                "summary": "Deletar Usuario",
+                "tags": ["Usuarios"],
+                "security": [{
+                        "x-password": []
+                    }],
+                "description": "Exclui o usuário da base de dados",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do usuário",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Usuario excluido com sucesso"
+                    },
+                    "400": {
+                        "description": "Dados de requição incompletos"
+                    },
+                    "401": {
+                        "description": "Dados do usuário incoerentes com a base."
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado na base de dados."
+                    }
+                }
+            }
         }
     },
     "components": {
