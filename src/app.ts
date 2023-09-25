@@ -1,5 +1,5 @@
 import express from "express";
-import { Mongo } from "./database/Mongo";
+import { Database } from "./database/Mongo";
 import { router } from "./router/router";
 
 class FinancesAPI {
@@ -12,7 +12,7 @@ class FinancesAPI {
     async main() {
         try {
             console.log("Servidor inicializado, tentando conexão com MongoDB.")
-            await Mongo.connect()
+            await Database.connect()
             console.log("MongoDB conectado.")
         } catch (error) {
             const err = error as Error
