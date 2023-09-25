@@ -1,0 +1,134 @@
+{
+    "openapi":"3.0.0",
+    "info":{
+        "title":"Finance API",
+        "description": "Backend para aplicação de controle de finanças do usuario."
+    },
+    "paths":{
+        "/usuarios/cadastro":{
+            "post":{
+                "summary":"Cadastro de Usuario",
+                "tags":["Usuarios"],
+                "security":[{
+                    "x-password":[]
+                }],
+                "description":"Criação de novo usuário",
+                "requestBody":{
+                    "description":"Dados necessário para cadastro de usuário",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/CreateUsuario"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description":"Usuario cadastrado com sucesso",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "$ref":"#/components/schemas/ResponseCreateUsuario"
+                                }
+                            }
+                        }
+                    },
+                    "400":{
+                        "description":"Dados de requição incompletos"
+                    }
+                }
+            }
+        },
+        "/usuario/login":{
+            "post":{
+                "summary":"Login de Usuario",
+                "tags":["Usuarios", "Login"],
+                "security":[{
+                    "x-password":[]
+                }],
+                "description":"Autenticação de usuário",
+                "requestBody":{
+                    "description":"Comparativo de dados informados pelo usuário e o cadastrado na base de dados.",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Login"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "204":{
+                        "description":"Usuario autenticado com sucesso"
+                    },
+                    "400":{
+                        "description":"Dados de requição incompletos"
+                    },
+                    "401":{
+                        "description":"Dados do usuário incoerentes com a base."
+                    }
+                }
+            }
+        }
+    },
+    "components":{
+        "schemas":{
+            "CreateUsuario":{
+                "type": "object",
+                "properties":{
+                    "nome":{
+                        "type": "string",
+                        "description":"Nome do usuário",
+                        "required": true,
+                        "example":"José das Couves"
+                    },
+                    "email":{
+                        "type":"string",
+                        "description":"Email do usuário",
+                        "required":true,
+                        "example":"couve@mineira.com"
+                    }
+                }
+            },
+            "ResponseCreateUsuario":{
+                "type": "object",
+                "properties":{
+                    "id":{
+                        "type": "string",
+                        "description":"id do usuário"
+                    },
+                    "message":{
+                        "type":"string",
+                        "description":"messagem de sucesso",
+                        "required":true,
+                        "example":"Cadastro realizado com sucesso."
+                    }
+                }
+            },
+            "Login":{
+                "type": "object",
+                "properties":{
+                    "email":{
+                        "type":"string",
+                        "description":"Email do usuário",
+                        "required":true,
+                        "example":"couve@mineira.com"
+                    }
+                }
+            }
+        },
+        "securitySchemes":{
+            "x-password":{
+                "type":"apiKey",
+                "in": "header",
+                "name":"x-password"
+            },
+            "x-newPassword":{
+                "type":"apiKey",
+                "in": "header",
+                "name":"x-newPassword"
+            }
+        }
+    }
+}

@@ -1,16 +1,11 @@
 import { Router} from "express";
-import { Home } from "../controllers/home";
 import Usuarios from "../controllers/Usuarios";
 import Categorias from "../controllers/Categorias";
 import Transacoes from "../controllers/Transacoes";
 
 export const router: Router = Router()
 
-router.get("/", Home.initial)
 
-/**
- * Fluxo de Usuários
- */
 router.post("/usuarios/login", Usuarios.login)
 router.post("/usuarios/cadastro", Usuarios.cadastrarUsuario)
 router.patch("/usuarios/:id/senha", Usuarios.atualizarSenha)

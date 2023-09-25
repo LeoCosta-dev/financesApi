@@ -5,15 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 const express_1 = require("express");
-const home_1 = require("../controllers/home");
 const Usuarios_1 = __importDefault(require("../controllers/Usuarios"));
 const Categorias_1 = __importDefault(require("../controllers/Categorias"));
 const Transacoes_1 = __importDefault(require("../controllers/Transacoes"));
 exports.router = (0, express_1.Router)();
-exports.router.get("/", home_1.Home.initial);
-/**
- * Fluxo de Usuários
- */
 exports.router.post("/usuarios/login", Usuarios_1.default.login);
 exports.router.post("/usuarios/cadastro", Usuarios_1.default.cadastrarUsuario);
 exports.router.patch("/usuarios/:id/senha", Usuarios_1.default.atualizarSenha);
