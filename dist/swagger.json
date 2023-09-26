@@ -137,6 +137,51 @@
                     }
                 }
             }
+        },
+        "/categorias": {
+            "get": {
+                "summary": "Buscar todas as categorias",
+                "tags": ["Categorias"],
+                "description": "Busca todas as catedorias cadastradas na base de dados",
+                "responses": {
+                    "200": {
+                        "description": "Categorias retornadas com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Categorias"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Não há base de dados para consutar"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Criar nova categoria",
+                "tags": ["Categorias"],
+                "description": "Cria nova categoria na base de dados",
+                "responses": {
+                    "201": {
+                        "description": "Categoria criada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CriarCategoria"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Requisição incompleta"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -181,6 +226,32 @@
                         "description": "Email do usuário",
                         "required": true,
                         "example": "couve@mineira.com"
+                    }
+                }
+            },
+            "Categorias": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "description": "id da categoria",
+                        "example": "jidejodmsasosjnuiofreji91"
+                    },
+                    "nome": {
+                        "type": "string",
+                        "description": "nome da categoria",
+                        "example": "Feira Livre"
+                    }
+                }
+            },
+            "CriarCategoria": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "description": "nome da categoria",
+                        "required": true,
+                        "example": "Feira Livre"
                     }
                 }
             }
