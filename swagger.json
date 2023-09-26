@@ -2,7 +2,13 @@
     "openapi":"3.0.0",
     "info":{
         "title":"Finance API",
-        "description": "Backend para aplicação de controle de finanças do usuario."
+        "description": "Backend para aplicação de controle de finanças do usuario.",
+        "servers":[
+            {
+                "url": "https://finaces-api.onrender.com/",
+                "description":"Link de acesso Finances Api em produção."
+            }
+        ]
     },
     "paths":{
         "/usuarios/cadastro":{
