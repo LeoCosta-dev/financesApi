@@ -26,3 +26,5 @@ deploy-prod:
 
 setup:
 	npm i
+
+	

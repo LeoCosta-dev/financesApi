@@ -7,7 +7,7 @@ const TransacoesService_1 = __importDefault(require("../services/TransacoesServi
 class Transacoes {
     static async cadastrar(req, res) {
         try {
-            if (!req?.headers["x-password"] || !req?.body?.email) {
+            if (!req?.headers["x-password"]) {
                 throw new Error("Dados inválidos");
             }
             const payload = {
@@ -19,7 +19,7 @@ class Transacoes {
                 usuarioId: req?.body?.usuarioId
             };
             const response = await TransacoesService_1.default.cadastrar(payload, `${req.headers["x-password"]}`);
-            res.status(201).json({ message: "cadastrado com sucesso", id: response });
+            res.status(201).json({ id: response, message: "cadastrado com sucesso" });
         }
         catch (e) {
             const error = e;

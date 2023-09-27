@@ -30,12 +30,12 @@
                     }
                 },
                 "responses": {
-                    "200": {
+                    "201": {
                         "description": "Usuario cadastrado com sucesso",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ResponseCreateUsuario"
+                                    "$ref": "#/components/schemas/ResponseCreate"
                                 }
                             }
                         }
@@ -188,6 +188,290 @@
                     }
                 }
             }
+        },
+        "/transacoes/cadastro": {
+            "post": {
+                "summary": "Cadastrar nova Transação",
+                "tags": ["Transacoes"],
+                "security": [{
+                        "x-password": []
+                    }],
+                "description": "Cadastra nova transação da base de dados",
+                "requestBody": {
+                    "description": "Comparativo de dados informados pelo usuário e o cadastrado na base de dados.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CriarTransacao"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Transação cadastrada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCreate"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados de requição incompletos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/transacoes/{id}": {
+            "get": {
+                "summary": "Buscar Transação",
+                "tags": ["Transacoes"],
+                "description": "Busca transação da base de dados pelo Id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id da transação",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Transação retornada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Transacao"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Dados de requição incompletos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Atualizar Transação existente",
+                "tags": ["Transacoes"],
+                "description": "Atualiza transação da base de dados pelo Id",
+                "requestBody": {
+                    "description": "Comparativo de dados informados pelo usuário e o cadastrado na base de dados.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CriarTransacao"
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                        "x-password": []
+                    }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id da transação",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Transação atualizada com sucesso"
+                    },
+                    "404": {
+                        "description": "Transanção não encontrada na base de dados"
+                    },
+                    "400": {
+                        "description": "Dados de requição incompletos"
+                    },
+                    "401": {
+                        "description": "Dados do usuário incoerentes com a base."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Deletar Transação existente",
+                "tags": ["Transacoes"],
+                "description": "Deleta transação da base de dados pelo Id",
+                "requestBody": {
+                    "description": "Comparativo de dados informados pelo usuário e o cadastrado na base de dados."
+                },
+                "security": [{
+                        "x-password": []
+                    }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id da transação",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Transação Deletada com sucesso"
+                    },
+                    "404": {
+                        "description": "Transanção não encontrada na base de dados"
+                    },
+                    "400": {
+                        "description": "Dados de requição incompletos"
+                    },
+                    "401": {
+                        "description": "Dados do usuário incoerentes com a base."
+                    }
+                }
+            }
+        },
+        "/transacoes/usuarios/{id}": {
+            "get": {
+                "summary": "Buscar Transações pelo id do usuário ",
+                "tags": ["Transacoes", "Usuarios"],
+                "description": "Busca transação da base de dados pelo Id do usuário",
+                "security": [{
+                        "x-password": []
+                    }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do usuario",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Transações retornada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "$ref": "#/components/schemas/Transacao"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuario não encontrada na base de dados"
+                    },
+                    "400": {
+                        "description": "Dados de requição incompletos"
+                    },
+                    "401": {
+                        "description": "Dados do usuário incoerentes com a base."
+                    }
+                }
+            }
+        },
+        "/transacoes/usuarios/{id}/saida": {
+            "get": {
+                "summary": "Buscar Transações de saida pelo id do usuário ",
+                "tags": ["Transacoes", "Usuarios"],
+                "description": "Busca transações de saída da base de dados pelo Id do usuário",
+                "security": [{
+                        "x-password": []
+                    }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do usuario",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Transações retornada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "$ref": "#/components/schemas/Transacao"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuario não encontrada na base de dados"
+                    },
+                    "400": {
+                        "description": "Dados de requição incompletos"
+                    },
+                    "401": {
+                        "description": "Dados do usuário incoerentes com a base."
+                    }
+                }
+            }
+        },
+        "/transacoes/usuarios/{id}/entrada": {
+            "get": {
+                "summary": "Buscar Transações de entrada pelo id do usuário ",
+                "tags": ["Transacoes", "Usuarios"],
+                "description": "Busca transações de entrada da base de dados pelo Id do usuário",
+                "security": [{
+                        "x-password": []
+                    }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id do usuario",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Transações retornada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "$ref": "#/components/schemas/Transacao"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuario não encontrada na base de dados"
+                    },
+                    "400": {
+                        "description": "Dados de requição incompletos"
+                    },
+                    "401": {
+                        "description": "Dados do usuário incoerentes com a base."
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -209,7 +493,7 @@
                     }
                 }
             },
-            "ResponseCreateUsuario": {
+            "ResponseCreate": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -221,6 +505,19 @@
                         "description": "messagem de sucesso",
                         "required": true,
                         "example": "Cadastro realizado com sucesso."
+                    }
+                }
+            },
+            "ResponseError": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "boolean",
+                        "description": "informa a existencia de erro"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "mensagem referente ao erro"
                     }
                 }
             },
@@ -258,6 +555,122 @@
                         "description": "nome da categoria",
                         "required": true,
                         "example": "Feira Livre"
+                    }
+                }
+            },
+            "CriarTransacao": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "description": "nome da transação",
+                        "required": true,
+                        "example": "compra"
+                    },
+                    "descricao": {
+                        "type": "string",
+                        "description": "descrição da transação",
+                        "required": true,
+                        "example": "compra na feira livre"
+                    },
+                    "CategoriaId": {
+                        "type": "string",
+                        "description": "Id da categoria ao qual a transação pertence",
+                        "required": true,
+                        "example": "ihdga9uhjafisuhioas"
+                    },
+                    "data": {
+                        "type": "string",
+                        "description": "Data de criação",
+                        "required": true,
+                        "example": "aaaa-mm-dd"
+                    },
+                    "tipo": {
+                        "type": "string",
+                        "description": "tipo de transação",
+                        "required": true,
+                        "example": "entrada || saida"
+                    },
+                    "usuarioId": {
+                        "type": "string",
+                        "description": "Id do usuário ao qual a transação pertence",
+                        "required": true,
+                        "example": "ondiojaiswdjfwepodmopaspo"
+                    }
+                }
+            },
+            "AtualizarTransacao": {
+                "type": "object",
+                "properties": {
+                    "nome": {
+                        "type": "string",
+                        "description": "nome da transação",
+                        "example": "compra"
+                    },
+                    "descricao": {
+                        "type": "string",
+                        "description": "descrição da transação",
+                        "example": "compra na feira livre"
+                    },
+                    "CategoriaId": {
+                        "type": "string",
+                        "description": "Id da categoria ao qual a transação pertence",
+                        "example": "ihdga9uhjafisuhioas"
+                    },
+                    "data": {
+                        "type": "string",
+                        "description": "Data de criação",
+                        "example": "aaaa-mm-dd"
+                    },
+                    "tipo": {
+                        "type": "string",
+                        "description": "tipo de transação",
+                        "example": "entrada || saida"
+                    },
+                    "usuarioId": {
+                        "type": "string",
+                        "description": "Id do usuário ao qual a transação pertence",
+                        "example": "ondiojaiswdjfwepodmopaspo"
+                    }
+                }
+            },
+            "Transacao": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "description": "Identificador unico da transação",
+                        "example": "knfdoaksmdiosamdiopa"
+                    },
+                    "nome": {
+                        "type": "string",
+                        "description": "nome da transação",
+                        "example": "compra"
+                    },
+                    "descricao": {
+                        "type": "string",
+                        "description": "descrição da transação",
+                        "example": "compra na feira livre"
+                    },
+                    "CategoriaId": {
+                        "type": "string",
+                        "description": "Id da categoria ao qual a transação pertence",
+                        "example": "ihdga9uhjafisuhioas"
+                    },
+                    "data": {
+                        "type": "string",
+                        "description": "Data de criação",
+                        "example": "aaaa-mm-dd"
+                    },
+                    "tipo": {
+                        "type": "string",
+                        "description": "tipo de transação",
+                        "example": "entrada || saida"
+                    },
+                    "usuarioId": {
+                        "type": "string",
+                        "description": "Id do usuário ao qual a transação pertence",
+                        "example": "ondiojaiswdjfwepodmopaspo"
                     }
                 }
             }
