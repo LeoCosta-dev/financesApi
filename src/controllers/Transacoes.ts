@@ -5,7 +5,7 @@ import TransacoesService from "../services/TransacoesService";
 class Transacoes{
     static async cadastrar(req: Request, res: Response){
         try {
-            if(!req?.headers["x-password"] || !req?.body?.email){
+            if(!req?.headers["x-password"]){
                 throw new Error("Dados inválidos")
             }
             const payload: ITransacao = {
@@ -17,7 +17,7 @@ class Transacoes{
                 usuarioId: req?.body?.usuarioId
             }
             const response = await TransacoesService.cadastrar(payload, `${req.headers["x-password"]}`)
-            res.status(201).json({message: "cadastrado com sucesso", id: response})
+            res.status(201).json({id: response, message: "cadastrado com sucesso"})
         } catch (e) {
             const error = e as Error
             res.status(400).json({error: true, message: error.message})
@@ -32,7 +32,7 @@ class Transacoes{
             res.status(200).json(transacao)
         } catch (e) {
             const error = e as Error
-            res.status(400).json({error: true, message: error.message})
+            res.status(404).json({error: true, message: error.message})
         }
     }
     static async atualizar(req: Request, res: Response){
@@ -44,7 +44,7 @@ class Transacoes{
             res.status(204).json()
         } catch (e) {
             const error = e as Error
-            res.status(400).json({error: true, message: error.message})
+            res.status(404).json({error: true, message: error.message})
         }
     }
     static async deletarTransacao(req: Request, res: Response){
